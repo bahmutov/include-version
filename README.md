@@ -8,6 +8,75 @@
 [![semantic-release][semantic-image] ][semantic-url]
 [![js-standard-style][standard-image]][standard-url]
 
+## Why?
+
+If you use [semantic release](https://github.com/semantic-release/semantic-release) 
+(and you should!) then the version inside `package.json` is no longer controlled by you directly.
+Instead, the automated step on CI server determines the version bump and sets it right before
+publishing to NPM registry. Typically I keep the placeholder version in `package.json` anyway -
+a lot of tools display a warning or break if this file is missing version property completely.
+
+```json
+{
+  "name": "my-tool",
+  "version": "0.0.0-semantic-release",
+  "description": "..."
+}
+```
+
+When publishing from CI, the command goes like this
+
+```json
+{
+  "scripts": {
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+  }
+}
+```
+
+The `semantic-release pre` looks at the last published version, computes the version bump
+(major, minor or patch), then writes the new version into `package.json` before proceeding
+to `npm publish`.
+
+A lof of time I build a bundle of JavaScript in my libraries. I love embedding the version
+in the bundle because it gives the user a very simple way to determine which software is running.
+Other libraries do it too, for example Angular has version property
+
+```
+angular.version
+//  {full: "1.3.14", major: 1, minor: 3, dot: 14, codeName: "instantaneous-browserification"}
+```
+
+Yet, I cannot embed the version when building the bundle, even on CI, because the version has
+NOT been determined yet! Thus this tool `include-version`. Just add it before `npm publish`
+command and it will grab the version from the `package.json` (already set by 
+`semantic-release pre`) and will replace the placeholder text in the bundle files.
+
+    npm install --save-dev include-version
+```json
+{
+  "scripts": {
+    "semantic-release": "semantic-release pre && include-version && npm publish && semantic-release post"
+  },
+  "config": {
+    "include-version": ["dist/bundle.js", "dist/bundle-min.js"]
+  }
+}
+```
+
+As shown above, you configure which files to update in `package.json` "config" block.
+In all files, the tool will replace string `{{ include-version }}` if found. Thus I usually
+have something like this in my library source
+
+```js
+module.exports = {
+  // bunch of code
+  VERSION: '{{ include-version }}'
+}
+```
+
+which will get set just before publishing to NPM.
+
 ### Small print
 
 Author: Gleb Bahmutov &lt;gleb.bahmutov@gmail.com&gt; &copy; 2016
