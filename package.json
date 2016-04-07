@@ -24,7 +24,7 @@
     "include-version": "README.md"
   },
   "files": [
-    "index.js",
+    "bin/*.js",
     "src/*.js",
     "!src/*-spec.js"
   ],
@@ -39,7 +39,9 @@
     "version"
   ],
   "license": "MIT",
-  "main": "index.js",
+  "bin": {
+    "include-version": "bin/include-version.js"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/bahmutov/include-version.git"
@@ -47,17 +49,17 @@
   "scripts": {
     "ban": "ban",
     "deps": "deps-ok",
-    "format": "standard-format -w index.js src/*.js",
+    "format": "standard-format -w bin/*.js src/*.js",
     "issues": "git-issues",
     "license": "license-checker --production --onlyunknown --csv",
-    "lint": "standard --verbose index.js src/*.js",
+    "lint": "standard --verbose bin/*.js src/*.js",
     "pretest": "npm run format && npm run lint",
     "secure": "nsp check",
     "size": "t=\"$(npm pack .)\"; wc -c \"${t}\"; tar tvf \"${t}\"; rm \"${t}\";",
     "test": "npm run unit",
     "unit": "mocha src/*-spec.js",
-    "semantic-release": "semantic-release pre && node index.js && npm publish && semantic-release post",
-    "demo": "node index.js"
+    "semantic-release": "semantic-release pre && node bin/include-version.js && npm publish && semantic-release post",
+    "demo": "node bin/include-version.js"
   },
   "devDependencies": {
     "ban-sensitive-files": "1.8.2",
