@@ -20,7 +20,8 @@
       ],
       "post-commit": [],
       "post-merge": []
-    }
+    },
+    "include-version": "README.md"
   },
   "files": [
     "index.js",

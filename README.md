@@ -77,6 +77,16 @@ module.exports = {
 
 which will get set just before publishing to NPM.
 
+## Example
+
+For example, this file has the version in the line below
+
+**version {{ include-version }}**
+
+On [Github](https://github.com/bahmutov/include-version#example), 
+this file shows the original raw text. 
+On NPM registry it shows the current published version.
+
 ### Small print
 
 Author: Gleb Bahmutov &lt;gleb.bahmutov@gmail.com&gt; &copy; 2016
