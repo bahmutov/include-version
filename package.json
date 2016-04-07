@@ -1,8 +1,8 @@
 {
   "name": "include-version",
   "description": "Adds package version to the built file before semantic release publishes it",
-  "version": "1.0.0",
   "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>",
+  "version": "0.0.0-semantic-release",
   "bugs": "https://github.com/bahmutov/include-version/issues",
   "config": {
     "pre-git": {
@@ -54,7 +54,8 @@
     "secure": "nsp check",
     "size": "t=\"$(npm pack .)\"; wc -c \"${t}\"; tar tvf \"${t}\"; rm \"${t}\";",
     "test": "npm run unit",
-    "unit": "mocha src/*-spec.js"
+    "unit": "mocha src/*-spec.js",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "devDependencies": {
     "ban-sensitive-files": "1.8.2",
@@ -64,6 +65,7 @@
     "nsp": "2.3.0",
     "pre-git": "3.8.3",
     "standard": "6.0.8",
-    "standard-format": "2.1.1"
+    "standard-format": "2.1.1",
+    "semantic-release": "^4.3.5"
   }
 }
