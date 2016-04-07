@@ -23,5 +23,5 @@ function replaceVersionTag (filename) {
   const tag = /\{\{\s?include\-version\s?\}\}/g
   const source = fs.readFileSync(filename, 'utf8')
   const replaced = source.replace(tag, pkg.version)
-  fs.writeFileSync(filename, replace, 'utf8')
+  fs.writeFileSync(filename, replaced, 'utf8')
 }

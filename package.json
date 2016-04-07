@@ -56,7 +56,8 @@
     "size": "t=\"$(npm pack .)\"; wc -c \"${t}\"; tar tvf \"${t}\"; rm \"${t}\";",
     "test": "npm run unit",
     "unit": "mocha src/*-spec.js",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+    "semantic-release": "semantic-release pre && node index.js && npm publish && semantic-release post",
+    "demo": "node index.js"
   },
   "devDependencies": {
     "ban-sensitive-files": "1.8.2",
