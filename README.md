@@ -44,7 +44,7 @@ Other libraries do it too, for example Angular has version property
 
 ```
 angular.version
-//  {full: "1.3.14", major: 1, minor: 3, dot: 14, codeName: "instantaneous-browserification"}
+//  {full: "1.3.14", major: 1, minor: 3, dot: 14, codeName: "..."}
 ```
 
 Yet, I cannot embed the version when building the bundle, even on CI, because the version has
@@ -85,7 +85,8 @@ For example, this file has the version in the line below
 
 On [Github](https://github.com/bahmutov/include-version#example), 
 this file shows the original raw text. 
-On NPM registry it shows the current published version.
+On [NPM registry](https://www.npmjs.com/package/include-version#example) 
+it shows the current published version.
 
 ### Small print
 
