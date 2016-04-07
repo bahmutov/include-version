@@ -2,11 +2,13 @@
 
 'use strict'
 
+var fromCurrent = require('path').join.bind(null, process.cwd())
+
 var fs = require('fs')
-if (!fs.existsSync('./package.json')) {
+if (!fs.existsSync(fromCurrent('package.json'))) {
   throw new Error('Missing package.json')
 }
-var pkg = require('./package.json')
+var pkg = require(fromCurrent('package.json'))
 if (!pkg.version) {
   throw new Error('Missing version in package.json')
 }
@@ -23,7 +25,7 @@ files.forEach(replaceVersionTag)
 
 function replaceVersionTag (filename) {
   var tag = /\{\{\s?include\-version\s?\}\}/g
-  var source = fs.readFileSync(filename, 'utf8')
+  var source = fs.readFileSync(fromCurrent(filename), 'utf8')
   var replaced = source.replace(tag, pkg.version)
   fs.writeFileSync(filename, replaced, 'utf8')
 }

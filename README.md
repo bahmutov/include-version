@@ -65,6 +65,8 @@ command and it will grab the version from the `package.json` (already set by
 ```
 
 As shown above, you configure which files to update in `package.json` "config" block.
+All file paths are relative to the current working folder, which is the root folder of the 
+NPM package.
 In all files, the tool will replace string `{{ include-version }}` if found. Thus I usually
 have something like this in my library source
 
